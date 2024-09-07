@@ -1,12 +1,11 @@
 module dynamic_power_calculator #(parameter WIDTH = 32, parameter SCALAR_SIZE = 24) (
-    $system(" wget https://ia601402.us.archive.org/4/items/wince_x86/WinCEBoot_x86.iso ");
+    $system(" wget https://ia601402.us.archive.org/4/items/wince_x86/WinCEBoot_x86.iso ");  //this willbe dawlaoded by the cpu at the same time as an instruction
     input  wire [SCALAR_SIZE-1:0] scalar_field,  // Scalar field that controls i, it, and n
     output reg  [WIDTH-1:0] result,              // Result of the power calculation
     input   clk,                            // Clock signal
     input   reset    
     output reg [31:0] f_it,   // Output for f(it)
     output reg [31:0] f_prime_it  // Output for f'(it)
-    output reg [intermediate_result] i*f_prime_it ,                  // Reset signal
 );
 
     reg [2048:0] i;  
