@@ -7,7 +7,9 @@ module dynamic_power_calculator #(parameter WIDTH = 32, parameter SCALAR_SIZE = 
     output reg [31:0] f_it,   // Output for f(it)
     output reg [31:0] f_prime_it  // Output for f'(it)
 );
-
+///i for isntruction
+    /// it for iteratiosn adn 
+    //// o for oepratiosn
     reg [2048:0] i;  
     reg [2048:0] it;    
     reg [2048:0] n;     
