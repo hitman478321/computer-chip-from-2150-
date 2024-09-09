@@ -9,7 +9,7 @@ module dynamic_power_calculator #(parameter WIDTH = 32, parameter SCALAR_SIZE = 
 );
 ///i for isntruction
     /// it for iteratiosn adn 
-    //// o for oepratiosn
+    /// and n for numbers of iteratiosn and oepration why the (i^it)^n
     reg [2048:0] i;  
     reg [2048:0] it;    
     reg [2048:0] n;     
