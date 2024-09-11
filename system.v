@@ -24,10 +24,10 @@ module dynamic_power_calculator #(parameter WIDTH = 32, parameter SCALAR_SIZE = 
     endfunction
     always_ff @(posedge clk or posedge reset) begin
         if (reset) begin
-            i <= 0;  // Reset 'i' to 0
-            it <= 0;  // Reset 'it' to 0
-            n <= 0;   // Reset 'n' to 0
-            result <= 0; // Reset result to 0
+            i <= 0;                                   // Reset 'i' to 0
+            it <= 0;                                  // Reset 'it' to 0
+            n <= 0;                                   // Reset 'n' to 0
+            result <= 0;                              // Reset result to 0
             i <= scalar_field[2047:2040];  
             it <= scalar_field[2039:2032]; 
             n <= scalar_field[2047:0];   
@@ -36,7 +36,7 @@ module dynamic_power_calculator #(parameter WIDTH = 32, parameter SCALAR_SIZE = 
             if (n > 0) begin
             f_prime_it = n * (it ** (n - 1));
             end else begin
-            f_prime_it = 0;  // Derivative for n <= 0
+            f_prime_it = 0;                           // Derivative for n <= 0
             intermediate_result <= i*f_prime_it;
             result <= power(intermediate_result, n);
             i <= i + 1;
