@@ -3,7 +3,11 @@
 ////instruction for equation of game engine
 ////instruction for equation of contexualtization/AI
 ////instruction for equation of ISP/creation of signals and trasmiteting and receivng 
-////instruction for equation of machine/app/software/PCL
+
+
+
+
+////instruction for equation of machine/app/software/PCL  (if you could realy understadn the cdoe you coudl create you own isntructions )
 ////instruction for equation of meter that can keep up with scalar field in compressing instruction that are being handeled (see system.v)
 
 
