@@ -43,6 +43,83 @@ module dynamic_power_calculator #(parameter WIDTH = 32, parameter SCALAR_SIZE = 
         end
     end
 endmodule
+        module SignalProcessing (
+    input wire [15:0] S_in,   // Input signal
+    input wire [15:0] G,      // Amplifier coefficient
+    input wire [15:0] Filter, // Filter coefficient
+    output wire [15:0] S_out  // Output signal
+);
+
+    // Internal signal for intermediate computation
+    wire [31:0] temp; // To hold intermediate values
+
+    // Compute G * S_in
+    wire [31:0] amplified_signal = G * S_in;
+
+    // Apply the Filter to the amplified signal
+    assign temp = amplified_signal * Filter;
+
+    // Processing block (truncating to fit 16-bit output)
+    assign S_out = temp[15:0]; // Truncate to 16-bit output
+
+endmodule
+
+// Function to encode an instruction
+function [31:0] encode_instruction;
+    input [15:0] opcode;    // Input opcode
+    input [15:0] operands;  // Input operands
+    begin
+        encode_instruction = {opcode, operands}; // Combine opcode and operands
+    end
+endfunction
+// Function to decode an instruction
+function [15:0] decode_opcode;
+    input [31:0] instruction; // Encoded instruction
+    begin
+        decode_opcode = instruction[31:16]; // Extract opcode
+    end
+endfunction
+
+function [15:0] decode_operands;
+    input [31:0] instruction; // Encoded instruction
+    begin
+        decode_operands = instruction[15:0]; // Extract operands
+    end
+endfunction
+
+module scalar_representation;
+
+    // Parameters
+    parameter [2048:0] p = before_comma; // Scalar field (example value)
+    parameter [2048:0] c = after_comma; // Decimal part (example value)
+    parameter integer before_comma = 20; // Number of digits before the decimal point
+    parameter integer after_comma = 20;  // Number of digits after the decimal point
+    parameter [2048:0] s; // Decimal part (example value)
+    // Total number of bits to represent the number
+    localparam integer total_bits = before_comma + after_comma;
+    // Representation of the scalar value (p.c)
+    wire [total_bits-1:0] v;
+    // Example signal (v1)
+    wire [total_bits-1:0] s;
+    assign v = (p,c);  // Combine p and c
+    assign s = (scalar_field * (s));  // Combine p and c
+    // Display the values
+    initial begin
+        $display("v = %0d", v);
+        $display("s = %0d", s);
+    end
+
+endmodule
+
+
+module AI-Anlayser;
+
+    parameter [2048:0] string// Scalar field (example value)
+    parameter [2048:0] points = string [15,8]; // Scalar field (example value)
+    parameter 
+assign way = (points = string[15,8])
+
+
     ///i for isntruction
     /// it for iteratiosn adn 
     /// and n for numbers of iteratiosn and oepration why the (i^it)^n
