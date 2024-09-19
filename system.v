@@ -1,3 +1,75 @@
+/*
+permtiers for aniamtiosn adn games
+*/
+module fixed_point_number (
+    output logic [63:0] combined_number // 64 bits to store large number
+);
+
+    // Example large numbers (need to be assigned as hexadecimal)
+    parameter [31:0] INTEGER_PART = 32'h0000_FFFF; // Replace with actual integer part
+    parameter [31:0] FRACTIONAL_PART = 32'hFFFF_0000; // Replace with actual fractional part
+
+    always_comb begin
+        combined_number = {INTEGER_PART, FRACTIONAL_PART}; // Combine the two 32-bit parts
+    end
+
+endmodule
+module number_change_detector (
+    input logic [15:0] four_digit_number, // 4-digit number (16 bits)
+    input logic [15:0] A, // Control value
+    input logic A_changed, // Signal indicating if A has changed
+    output logic first_digit_changed, // Output for first digit change
+    output logic last_digit_changed // Output for last digit change
+);
+
+    // Internal registers to hold previous values
+    reg [3:0] prev_first_digit;
+    reg [3:0] prev_last_digit;
+    reg prev_A;
+
+    // Extract first and last digits
+    wire [3:0] first_digit = four_digit_number[15:12]; // Upper 4 bits
+    wire [3:0] last_digit = four_digit_number[3:0];   // Lower 4 bits
+
+    always_ff @(posedge clk) begin
+        if (A_changed) begin
+            // If A has changed, check if the first or last digit has changed
+            if (first_digit != prev_first_digit) begin
+                first_digit_changed <= 1'b1;
+                prev_first_digit <= first_digit;
+            end else begin
+                first_digit_changed <= 1'b0;
+            end
+
+            if (last_digit != prev_last_digit) begin
+                last_digit_changed <= 1'b1;
+                prev_last_digit <= last_digit;
+            end else begin
+                last_digit_changed <= 1'b0;
+            end
+
+            // Update previous A value
+            prev_A <= A;
+        end
+    end
+
+
+module digit_representations_for_teh_scalar_field;
+
+    // 4-digit number
+    reg [3:0] digit4; // 4 bits for each digit
+
+    // 6-digit number
+    reg [5:0] digit6; // 6 bits for each digit
+
+    // 10-digit number
+    reg [9:0] digit10; // 10 bits for each digit
+
+endmodule
+
+
+endmodule
+
 module dynamic_power_calculator #(parameter WIDTH = 32, parameter SCALAR_SIZE = 24) (
     input  wire [SCALAR_SIZE-1:0] scalar_field,  // Scalar field that controls i, it, and n
     output reg  [WIDTH-1:0] result,              // Result of the power calculation
