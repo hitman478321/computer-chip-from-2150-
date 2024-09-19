@@ -447,7 +447,166 @@ module ContextualizedRepresentation(
     end
 
 endmodule
+/* Machine Code=Code Generator(Optimized IR)→Binary Code
+Optimized IR=Optimizer(IR)→Optimized Intermediate Code
+IR=IR Generator(AST)→Intermediate Code
+AST=Parser(Tokens)→Parse Tree→Abstract Syntax Tree (AST)
+Machine Code=Code Generator(Optimizer(IR Generator(Parser(Lexer(Source Code)))))
+Tokens=Lexer(Source Code)→{Token1​,Token2​,…,Tokenn​}   lexic analysis
+Machine Code=Code Generation(Intermediate Representation(Parsing(Lexical Analysis(Source Code))))
+1. **Lexical Analysis**:
+2. **Parsing**:
+3. **Intermediate Representation (IR)**:
+4. **Optimization**:
+5. **Code Generation**:
+6. **Combining Stages**:
+In this expanded form:
+- **Lexer** breaks down the source code into tokens.
+- **Parser** processes tokens to form a parse tree and then abstracts it into an AST.
+- **IR Generator** converts the AST into an intermediate representation.
+- **Optimizer** refines the IR for efficiency.
+- **Code Generator** translates the optimized IR into machine code.
 
+*/
+// Module for Lexical Analysis
+module Lexer(
+    input [31:0] source_code, // Assume source code is represented as a 32-bit input
+    output [31:0] tokens // Output tokens as 32-bit data
+);
+    // Lexical analysis logic here
+endmodule
+
+// Module for Parsing
+module Parser(
+    input [31:0] tokens,
+    output [31:0] parse_tree, // Parse tree represented as 32-bit data
+    output [31:0] ast // Abstract Syntax Tree (AST) as 32-bit data
+);
+    // Parsing logic here
+endmodule
+
+// Module for Intermediate Representation (IR) Generation
+module IR_Generator(
+    input [31:0] ast,
+    output [31:0] ir // Intermediate Representation as 32-bit data
+);
+    // IR generation logic here
+endmodule
+
+// Module for Optimization
+module Optimizer(
+    input [31:0] ir,
+    output [31:0] optimized_ir // Optimized Intermediate Representation as 32-bit data
+);
+    // Optimization logic here
+endmodule
+
+// Module for Code Generation
+module Code_Generator(
+    input [31:0] optimized_ir,
+    output [31:0] machine_code // Machine code as 32-bit data
+);
+    // Code generation logic here
+endmodule
+
+// Top-level module combining all stages
+module Compiler(
+    input [31:0] source_code,
+    output [31:0] machine_code
+);
+    wire [31:0] tokens;
+    wire [31:0] parse_tree;
+    wire [31:0] ast;
+    wire [31:0] ir;
+    wire [31:0] optimized_ir;
+    
+    // Instantiate and connect modules
+    Lexer lexer (
+        .source_code(source_code),
+        .tokens(tokens)
+    );
+    
+    Parser parser (
+        .tokens(tokens),
+        .parse_tree(parse_tree),
+        .ast(ast)
+    );
+    
+    IR_Generator ir_generator (
+        .ast(ast),
+        .ir(ir)
+    );
+    
+    Optimizer optimizer (
+        .ir(ir),
+        .optimized_ir(optimized_ir)
+    );
+    
+    Code_Generator code_generator (
+        .optimized_ir(optimized_ir),
+        .machine_code(machine_code)
+    );
+endmodule
+
+/*
+/*AI-genrator
+Compiled Code=High-Level Code→Intermediate Representation→Assembly Code→Machine Code
+ I=f(H)
+A=g(I)
+ M=h(A)
+- \( f \), \( g \), and \( h \) are functions representing the respective translation steps.*/
+*/
+// Module for translating High-Level Code to Intermediate Representation (IR)
+module HighLevelToIR(
+    input [31:0] high_level_code, // High-Level Code as 32-bit data
+    output [31:0] intermediate_representation // Intermediate Representation as 32-bit data
+);
+    // Function f: High-Level Code to IR
+    // Translation logic here
+endmodule
+
+// Module for translating Intermediate Representation to Assembly Code
+module IRToAssembly(
+    input [31:0] intermediate_representation,
+    output [31:0] assembly_code // Assembly Code as 32-bit data
+);
+    // Function g: IR to Assembly Code
+    // Translation logic here
+endmodule
+
+// Module for translating Assembly Code to Machine Code
+module AssemblyToMachineCode(
+    input [31:0] assembly_code,
+    output [31:0] machine_code // Machine Code as 32-bit data
+);
+    // Function h: Assembly Code to Machine Code
+    // Translation logic here
+endmodule
+
+// Top-level module combining all translation steps
+module AI_Generator(
+    input [31:0] high_level_code,
+    output [31:0] machine_code
+);
+    wire [31:0] intermediate_representation;
+    wire [31:0] assembly_code;
+    
+    // Instantiate and connect modules
+    HighLevelToIR high_level_to_ir (
+        .high_level_code(high_level_code),
+        .intermediate_representation(intermediate_representation)
+    );
+    
+    IRToAssembly ir_to_assembly (
+        .intermediate_representation(intermediate_representation),
+        .assembly_code(assembly_code)
+    );
+    
+    AssemblyToMachineCode assembly_to_machine_code (
+        .assembly_code(assembly_code),
+        .machine_code(machine_code)
+    );
+endmodule
 /*           
  */
 
